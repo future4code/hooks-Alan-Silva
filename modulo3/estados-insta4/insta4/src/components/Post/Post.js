@@ -7,7 +7,6 @@ import iconeCoracaoBranco from '../../img/favorite-white.svg'
 import iconeCoracaoPreto from '../../img/favorite.svg'
 import iconeComentario from '../../img/comment_icon.svg'
 import { SecaoComentario } from '../SecaoComentario/SecaoComentario'
-import { SecaoCurtidas } from '../SecaoCurtidas/SecaoCurtidas'
 
 const PostContainer = styled.div`
 	border: 1px solid gray;
