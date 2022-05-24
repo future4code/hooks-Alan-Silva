@@ -3,76 +3,60 @@ import axios from 'axios'
 
 export default class Usuario extends React.Component {
 	state = {
-		todosUsuarios: [],
-		inputNovoUsuario: '',
+		nome: '',
+		email: '',
 	}
-	componentDidMount() {
-		this.pegarUsuario()
+	verificarNome = (event) => {
+		this.setState({
+			nome: event.target.value,
+		})
 	}
-
-	onChangeinputNovoUsuario = (event) => {
-		this.setState({ inputNovoUsuario: event.target.value })
-	}
-
-	pegarUsuario = () => {
-		axios
-			.get(
-				'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users',
-
-				{
-					headers: {
-						Authorization: 'alan-fabricio-hopper',
-					},
-				}
-			)
-			.then((response) => {
-				this.setState({ todosUsuarios: response.data })
-			})
-			.catch((error) => {
-				console.log('Error', error.response.data)
-			})
+	verificarEmail = (event) => {
+		this.setState({
+			email: event.target.value,
+		})
 	}
 
-	criarUmUsuario = () => {
+	FazerUmCadastro = () => {
+		const url =
+			'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
 		const body = {
-			name: this.state.inputNovoUsuario,
-			email: this.state.inputNovoUsuario + '@labenu.com',
+			name: this.state.nome,
+			email: this.state.email,
 		}
 		axios
-			.post(
-				'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users',
-				body,
-				{
-					headers: { Authorization: 'alan-fabricio-hopper' },
-				}
-			)
+			.post(url, body, {
+				headers: {
+					Authorization: 'alan-fabricio-hopper',
+				},
+			})
 			.then(() => {
-				this.setState({ inputNovoUsuario: '' })
-				this.pegarUsuario()
+				alert('Cadastro Realizado com Sucesso')
 			})
 			.catch((error) => {
-				console.log('Erro ao criar usuario', error.response.data)
+				alert('Erro ao Cadastrar')
+			})
+			.finally(() => {
+				this.setState({ nome: '', email: '' })
 			})
 	}
 
 	render() {
-		const list = this.state.todosUsuarios.map((cadausuario) => {
-			return <h3>{cadausuario.name}</h3>
-		})
-
 		return (
 			<section>
+				<h1>Tela De Cadastro</h1>
+				<button onClick={this.props.filhoUm}>Trocar De Pagina</button>
 				<input
-					value={this.state.inputNovoUsuario}
-					onChange={this.onChangeinputNovoUsuario}
+					placeholder='Nome'
+					value={this.state.nome}
+					onChange={this.verificarNome}
 				/>
 				<input
-					value={this.state.inputNovoUsuario}
-					onChange={this.state.inputNovoUsuario}
+					placeholder='Email'
+					value={this.state.email}
+					onChange={this.verificarEmail}
 				/>
-				<button onClick={this.criarUmUsuario}>Crie um novo usuario</button>
-
-				<section>{list}</section>
+				<button onClick={this.FazerUmCadastro}>Cadastrar</button>
 			</section>
 		)
 	}
