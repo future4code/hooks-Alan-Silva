@@ -1,33 +1,36 @@
 import React from 'react'
-import styled from 'styled-components'
+import Styled from 'styled-components'
+import { Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const Botoes = styled.div`
+const Botoes = Styled.section`
 	display: grid;
 	grid-auto-flow: column;
 	gap: 16px;
 	text-decoration: none;
-`
-const Titulo = styled.h1`
-	margin: 65px;
-	align-items: center;
-	color: purple;
+	a {
+		text-decoration: none;
+	}
 `
 
 const HomePage = () => {
 	return (
 		<div>
-			<section>
-				<Titulo>Labex</Titulo>
-				<Botoes>
-					<Link to={'/inscricao'}>
-						<button>Inscrever - se</button>
-					</Link>
-					<Link to={'/login'}>
-						<button>Administração</button>
-					</Link>
-				</Botoes>
-			</section>
+			<Typography variant='h2' align={'center'} color={'purple'} gutterBottom>
+				Viage com a Labex
+			</Typography>
+			<Botoes>
+				<Link to={'/login'}>
+					<Button variant={'contained'} color={'secondary'}>
+						Login
+					</Button>
+				</Link>
+				<Link to={'/inscricao'}>
+					<Button variant={'contained'} color={'secondary'}>
+						Gerenciar viagens
+					</Button>
+				</Link>
+			</Botoes>
 		</div>
 	)
 }
