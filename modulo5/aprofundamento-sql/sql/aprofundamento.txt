@@ -1,0 +1,55 @@
+USE `**********************8`;
+-- exercicio 01
+CREATE TABLE Projetos (
+id INT PRIMARY KEY,
+name VARCHAR(40) NOT NULL,
+title VARCHAR(25) NOT NULL,
+date DATE NOT NULL
+);
+-- exercicio 02
+INSERT INTO Projetos (id, name, title, date)
+VALUES(
+001,
+"LabeSky",
+"LSy",
+"2022/12/20"
+);
+INSERT INTO Projetos (id, name, title, date)
+VALUES(
+002,
+"Labefy",
+"LFy",
+"2024/01/06"
+);
+INSERT INTO Projetos (id, name, title, date)
+VALUES(
+003,
+"AstroZoom",
+"AZm",
+"2023/10/05"
+);
+-- exercicio 03
+ALTER TABLE Projetos DROP COLUMN title;
+ALTER TABLE Projetos CHANGE date dueDate DATE NOT NULL;
+-- exercicio 04
+ALTER TABLE Projetos ADD description VARCHAR(250) NOT NULL;
+UPDATE Projetos
+SET description = "Projeto de sistema em nuvem da Labenu."
+WHERE id = 1;
+UPDATE Projetos
+SET description = "Projeto de sistema de gerenciamento de músicas da Labenu."
+WHERE id = 2;
+UPDATE Projetos
+SET description = "Projeto de rede de comunicação da Labenu."
+WHERE id = 3;
+-- exercicio 05
+SELECT id, name, dueDate, description FROM Projetos ORDER BY dueDate DESC;
+SELECT name, dueDate FROM Projetos ORDER BY dueDate ASC LIMIT 2;
+
+
+
+
+
+
+DESCRIBE Projetos;
+SELECT * FROM Projetos;
